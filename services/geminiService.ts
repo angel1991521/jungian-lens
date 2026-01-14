@@ -23,8 +23,9 @@ export const analyzeJungianDynamics = async (input: AnalysisInput) => {
     2. 请在功能名称后的括号内标注该功能的荣格原型位阶名称。
        - 对方/我的阳面（1-4位）：主导功能(英雄)、辅助功能(家长/慈母)、永恒少年(孩子)、劣势功能(阿尼玛/阿尼姆斯)。
        - 对方/我的阴面（5-8位）：对立功能(敌手)、盲点功能(挑剔者/老智者)、魔鬼功能(欺诈者)、破坏功能(魔鬼)。
-    3. 极其详尽：结合情境深度推导每一个功能的运作逻辑。对于“对方的荣格八维使用分析”，字号应与“对方的同轴功能动力分析”一致。
-    4. 策略精准：基于“我”的认知功能序列，针对性地提供博弈策略。
+    3. 极其详尽：结合情境深度推导每一个功能的运作逻辑。
+    4. 同轴功能动力分析：请深入分析对方的同轴功能（如感知轴Se-Ni/Ne-Si，判断轴Te-Fi/Fe-Ti）在事件中的表现，并将其与“我”的同轴功能进行对比分析，指出双方在认知轴向上的冲突点或互补点。
+    5. 策略精准：基于“我”的认知功能序列，针对性地提供博弈策略，说明如何利用我的功能来克制或对付对方的功能表现。
 
     请严格按照 JSON 格式输出。
   `;
@@ -77,8 +78,8 @@ export const analyzeJungianDynamics = async (input: AnalysisInput) => {
               items: {
                 type: Type.OBJECT,
                 properties: {
-                  axis: { type: Type.STRING },
-                  dynamics: { type: Type.STRING }
+                  axis: { type: Type.STRING, description: "功能的名称轴，例如：Se-Ni 观察轴" },
+                  dynamics: { type: Type.STRING, description: "对方在该轴上的表现与我的同轴功能的对比分析" }
                 },
                 required: ["axis", "dynamics"]
               }

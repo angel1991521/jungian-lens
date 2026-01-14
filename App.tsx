@@ -14,7 +14,8 @@ import {
   Bolt,
   Description,
   WbSunny,
-  Brightness2
+  Brightness2,
+  CompareArrows
 } from '@mui/icons-material';
 
 const MBTI_OPTIONS = Object.values(MBTIType);
@@ -32,7 +33,6 @@ const App: React.FC = () => {
   const [result, setResult] = useState<AnalysisResponse | null>(null);
 
   const handleSubmit = async () => {
-    // Check mandatory fields (custom functions is optional)
     const { myCustomFunctions, ...mandatoryFields } = formData;
     if (Object.values(mandatoryFields).some(val => !val)) {
       alert("请填写所有必要输入框（基本资料、MBTI、关系及事情经过）以获取准确分析");
@@ -222,12 +222,12 @@ const App: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <h3 className="text-xl font-bold flex items-center gap-2 text-slate-800">
-                  <Handshake className="text-orange-500" /> 对方的同轴功能动力分析
+                  <CompareArrows className="text-orange-500" /> 双方同轴功能对比分析
                 </h3>
                 {result.axisAnalysis.map((a, i) => (
                   <div key={i} className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm border-l-4 border-l-orange-500">
                     <p className="font-bold text-slate-800 mb-2">{a.axis}</p>
-                    <p className="text-slate-600 text-sm leading-relaxed">{a.dynamics}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap">{a.dynamics}</p>
                   </div>
                 ))}
               </div>
@@ -254,14 +254,14 @@ const App: React.FC = () => {
                </div>
                <div className="relative z-10 space-y-8">
                   <h3 className="text-2xl font-bold flex items-center gap-3">
-                    <Shield className="text-indigo-400" /> 我的应对策略 (基于我的 {formData.myMbti})
+                    <Shield className="text-indigo-400" /> 我的应对策略 (基于我的认知序列)
                   </h3>
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     {/* My Light Side */}
                     <div className="space-y-4">
                       <h4 className="text-xs font-black text-indigo-400 uppercase tracking-[0.2em] flex items-center gap-2">
-                        <WbSunny fontSize="small" /> 阳面功能应对
+                        <WbSunny fontSize="small" /> 阳面功能克制与防御
                       </h4>
                       <div className="grid grid-cols-1 gap-4">
                         {result.myStrategy.light.map((s, i) => (
@@ -279,7 +279,7 @@ const App: React.FC = () => {
                     {/* My Shadow Side */}
                     <div className="space-y-4">
                       <h4 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
-                        <Brightness2 fontSize="small" /> 阴面功能应对
+                        <Brightness2 fontSize="small" /> 阴面功能博弈与反击
                       </h4>
                       <div className="grid grid-cols-1 gap-4">
                         {result.myStrategy.shadow.map((s, i) => (
